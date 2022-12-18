@@ -182,6 +182,85 @@ class Ui_MainWindow(object):
         self.add_functions()
 
 
+ def retranslateUi(self, MainWindow: QtWidgets.QMainWindow) -> None:
+        """This function gives names to elements of buttons, labels etc,
+        which was created in setupUI function"""
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Dataset creator"))
+        self.PathToDataset.setText(_translate(
+            "MainWindow", "Enter path to dataset"))
+        self.NextTulip.setText(_translate("MainWindow", "Next tulip"))
+        self.NextRose.setText(_translate("MainWindow", "Next rose"))
+        self.CreateAnnotation.setText(
+            _translate("MainWindow", "Create annotation"))
+        self.PathToDirOfDataset.setText(_translate(
+            "MainWindow", "Enter path to dir of dataset"))
+        self.Task1.setText(_translate("MainWindow", "Task1"))
+        self.Task2.setText(_translate("MainWindow", "Task2"))
+        self.Task3.setText(_translate("MainWindow", "Task3"))
+
+
+    def next_tulip(self) -> None:
+        """This function is Iterator.
+        It displays the next image of leopard on the screen untill the end.
+        After that it begins with start."""
+        if self.__iterator_tulip.path == "":
+            path = self.PathToDataset.text()
+            if os.path.isdir(path):
+                self.__iterator_tulip.path_init(os.path.join(path, "tulip"))
+                self.__iterator_tulip.file_names_init()
+                self.__iterator_tulip.limit_init()
+                self.label_2.setPixmap(QtGui.QPixmap(
+                self.__iterator_tulip.__next__()))
+            else:
+                self.ErrorMessage()
+        else:
+            self.label_2.setPixmap(QtGui.QPixmap(
+            self.__iterator_tulip.__next__()))
+
+
+    def next_rose(self) -> None:
+        """This function is Iterator.
+        It displays the next image of tiger on the screen untill the end.
+        After that it begins with start."""
+        if self.__iterator_rose.path == "":
+            path = self.PathToDataset.text()
+            if os.path.isdir(path):
+                self.__iterator_rose.path_init(os.path.join(path, "rose"))
+                self.__iterator_rose.file_names_init()
+                self.__iterator_rose.limit_init()
+                self.label_2.setPixmap(QtGui.QPixmap(
+                self.__iterator_rose.__next__()))
+            else:
+                self.ErrorMessage()
+        else:
+            self.label_2.setPixmap(QtGui.QPixmap(
+            self.__iterator_rose.__next__()))
+
+
+ def create_annotation(self) -> None:
+        """This function creates csv file with abs path of class of dataset."""
+        path_to_dataset = self.PathToDataset.text()
+        if os.path.isdir(path_to_dataset):
+            try:
+                create_csv_annotation(
+                path_to_dataset.split("\\")[-1], "annotation.csv")
+            except:
+                self.ErrorMessage2()
+        else:
+            self.ErrorMessage()
+
+
+    def add_functions(self) -> None:
+        """This function adds an event handler."""
+        self.CreateAnnotation.clicked.connect(self.create_annotation)
+        self.NextTulip.clicked.connect(self.next_tulip)
+        self.NextRose.clicked.connect(self.next_rose)
+        self.Task1.clicked.connect(self.task1_exec)
+        self.Task2.clicked.connect(self.task2_exec)
+        self.Task3.clicked.connect(self.task3_exec)
+
 
 
 
