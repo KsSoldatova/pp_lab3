@@ -1,48 +1,37 @@
 import csv
 import os
+from typing import Optional
 
 
 class IteratorTask1:
-    def __init__(self, dataset: str, name: str, path: str):
-        self.path = ""
-        self.name = ""
-        self.names = []
-        self.limit = 0
-        self.counter = 0
-        self.dataset = ""
-        self.init(dataset, name, path)
+    def __init__(self) -> None:
+        self.__file_names = []
+        self.__counter = 0
+        self.__limit = 0
+        self.__path = ""
 
-    def __next__(self):
-        if self.counter < self.limit:
-            self.counter += 1
-            return self.names[self.counter - 1]
-        elif self.counter == self.limit:
-            self.counter = 0
-            self.counter += 1
-            return self.names[self.counter - 1]
+    def __next__(self) -> Optional[str]:
+        if self.__counter < self.__limit:
+            self.__counter += 1
+            return os.path.join(self.__path, self.__file_names[self.__counter - 1])
+        else:
+            raise StopIteration
 
-    def init(self, dataset: str, name: str, path: str):
-        if not "dataset" in path:
-            raise "error"
-        self.path = path
-        self.name = name
+    def __iter__(self):
+        return self
 
-        self.names = os.listdir(os.path.join(dataset, self.path, self.name))
+    def clear(self) -> None:
+        self.__counter = 0
 
-        for i in self.names:
-            if not ".jpg" in i:
-                self.names.remove(i)
-        self.limit = len(self.names)
-        self.counter = 0
+    def file_names_init(self) -> None:
+        self.__file_names = os.listdir(self.__path)
 
-    def clear(self):
-        self.counter = 0
+    def path_init(self, path: str) -> None:
+        self.__path = path
 
-    def setName(self, name: str):
-        self.init(self.dataset, name, self.path)
+    def limit_init(self) -> None:
+        self.__limit = len(self.__file_names)
 
-    def getName(self):
-        print(self.name)
-
-    def setPath(self, path: str):
-        self.init(self.dataset, self.name, path)
+    @property
+    def path(self) -> Optional[str]:
+        return self.__path
