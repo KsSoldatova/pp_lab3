@@ -285,4 +285,38 @@ class Ui_MainWindow(object):
         error.setStandardButtons(QMessageBox.Ok)
         error.exec_()
 
+    def task1_exec(self) -> None:
+        """This function execute task 1 from second lab."""
+        path = self.PathToDirOfDataset.text()
+        if os.path.isdir(path):
+            try:
+                create_csv_annotation(path.split(
+                    "\\")[-1], "Task1_annotation.csv")
+            except:
+                self.ErrorMessage2()
+        else:
+            self.ErrorMessage()
 
+    def task2_exec(self) -> None:
+        """This function execute task 2 from second lab."""
+        path = self.PathToDirOfDataset.text()
+        if os.path.isdir(path):
+            try:
+                create_copy_dataset(path.split(
+                    "\\")[-1], "Task2_dataset", "Task2_Annotation.csv")
+            except:
+                self.ErrorMessage2()
+        else:
+            self.ErrorMessage()
+
+    def task3_exec(self) -> None:
+        """This function execute task 3 from second lab."""
+        path = self.PathToDirOfDataset.text()
+        if os.path.isdir(path):
+            try:
+                create_randomname_file(
+                    "Task3_Annotation.csv", "Task3_Dataset", path.split("\\")[-1])
+            except:
+                self.ErrorMessage2()
+        else:
+            self.ErrorMessage()
