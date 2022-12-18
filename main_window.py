@@ -256,6 +256,33 @@ class Ui_MainWindow(object):
         self.Task2.clicked.connect(self.task2_exec)
         self.Task3.clicked.connect(self.task3_exec)
 
+    def ErrorMessage(self) -> None:
+        """This function displays error message that dir does not exist."""
+        error = QMessageBox()
+        error.setWindowTitle("Error")
+        error.setText(
+            "Dir with that path does not exist.\nTry again.")
+        error.setIcon(QMessageBox.Warning)
+        error.setStandardButtons(QMessageBox.Ok)
+        error.exec_()
 
+    def ErrorMessage2(self) -> None:
+        """This function displays error message that dir does not contain."""
+        error = QMessageBox()
+        error.setWindowTitle("Error")
+        error.setText(
+            "This dir doesn't contain dataset's objects.\nTry again.")
+        error.setIcon(QMessageBox.Warning)
+        error.setStandardButtons(QMessageBox.Ok)
+        error.exec_()
+
+    def ErrorMessage3(self) -> None:
+        """This function displays error message that pictures are over."""
+        error = QMessageBox()
+        error.setWindowTitle("Error")
+        error.setText("Pictures are over.\nThey will start anew.")
+        error.setIcon(QMessageBox.Warning)
+        error.setStandardButtons(QMessageBox.Ok)
+        error.exec_()
 
 
