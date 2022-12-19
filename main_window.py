@@ -201,7 +201,7 @@ class Ui_MainWindow(object):
 
     def next_tulip(self) -> None:
         """This function is Iterator.
-        It displays the next image of leopard on the screen untill the end.
+        It displays the next image of tulip on the screen untill the end.
         After that it begins with start."""
         if self.__iterator_tulip.path == "":
             path = self.PathToDataset.text()
@@ -219,7 +219,7 @@ class Ui_MainWindow(object):
 
     def next_rose(self) -> None:
         """This function is Iterator.
-        It displays the next image of tiger on the screen untill the end.
+        It displays the next image of rose on the screen untill the end.
         After that it begins with start."""
         if self.__iterator_rose.path == "":
             path = self.PathToDataset.text()
