@@ -276,15 +276,6 @@ class Ui_MainWindow(object):
         error.setStandardButtons(QMessageBox.Ok)
         error.exec_()
 
-    def ErrorMessage3(self) -> None:
-        """This function displays error message that pictures are over."""
-        error = QMessageBox()
-        error.setWindowTitle("Error")
-        error.setText("Pictures are over.\nThey will start anew.")
-        error.setIcon(QMessageBox.Warning)
-        error.setStandardButtons(QMessageBox.Ok)
-        error.exec_()
-
     def task1_exec(self) -> None:
         """This function execute task 1 from second lab."""
         path = self.PathToDirOfDataset.text()
@@ -320,3 +311,13 @@ class Ui_MainWindow(object):
                 self.ErrorMessage2()
         else:
             self.ErrorMessage()
+
+
+if __name__ == "__main__":
+    print('Start!')
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
