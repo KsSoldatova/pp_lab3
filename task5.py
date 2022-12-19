@@ -14,8 +14,10 @@ class IteratorTask1:
         if self.__counter < self.__limit:
             self.__counter += 1
             return os.path.join(self.__path, self.__file_names[self.__counter - 1])
-        else:
-            raise StopIteration
+        elif self.__counter == self.__limit:
+            self.counter = 0
+            self.counter += 1
+            return self.names[self.counter - 1]
 
     def __iter__(self):
         return self
